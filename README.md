@@ -63,3 +63,6 @@ The production build will generate client and server modules by running both cli
 ```shell
 npm run build # or `yarn build`
 ```
+
+
+if you dont want a layout on a certain page you would do a ! for example about!.tsx wont have a layout
