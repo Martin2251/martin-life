@@ -1,4 +1,4 @@
-import { component$, useSignal } from '@builder.io/qwik';
+import { component$, useSignal, useStore } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 
 
@@ -6,12 +6,15 @@ import type { DocumentHead } from '@builder.io/qwik-city';
 
 export default component$(() => {
   const name = useSignal('martin')
+
+  const person = useStore({name: "martin", age: 32})
   return (
     <>
 
 
       <div>
       <h1>hiiii , {name.value}</h1>
+      <p>hello, {person.name} - {person.age}</p>
       </div>
     </>
   );
