@@ -32,6 +32,8 @@ export default component$(() => {
       {blogs.map(blog => (
         <div key={blog.id}>{blog.title}</div>
       ))}
+
+      <button onClick$={() =>blogs.pop()}>remove a blog</button>
       </div>
     </>
   );
