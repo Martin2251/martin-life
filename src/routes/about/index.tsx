@@ -10,6 +10,7 @@ import AboutStyles from "./about.css?inline"
 export default component$(() => {
     // need to useStyles hook 
     useStyles$(AboutStyles)
+    // not scoped to any page
     return(
         <article>
             <h2>About</h2>
