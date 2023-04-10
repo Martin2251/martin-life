@@ -1,9 +1,15 @@
 // every route needs its own folder and file called index.tsx
 
-import { component$ } from "@builder.io/qwik";
+import { component$, useStyles$ } from "@builder.io/qwik";
 
 // the dollar sign spilts it on chunks its code spiltting on steroids
+
+import AboutStyles from "./about.css?inline"
+// need to have the inline part
+
 export default component$(() => {
+    // need to useStyles hook 
+    useStyles$(AboutStyles)
     return(
         <article>
             <h2>About</h2>
