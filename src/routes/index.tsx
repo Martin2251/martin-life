@@ -1,7 +1,8 @@
 import { component$, Resource, useSignal, useStore } from '@builder.io/qwik';
-import type { DocumentHead, RequestHandler } from '@builder.io/qwik-city';
-import { useEndpoint } from '@builder.io/qwik-city'
+import type { DocumentHead} from '@builder.io/qwik-city';
+import { routeLoader$ } from '@builder.io/qwik-city';
 interface BlogData {
+
   id:string,
   title:string,
   content:string,
@@ -9,12 +10,12 @@ interface BlogData {
 
 //function to run on the server to get the data, this is onGet because its a get if its a post then onPost
 // run on server not the browser
-export const onGet: RequestHandler<BlogData[]> = async () => {
+export const useBlogs = routeLoader$<BlogData[]>(async() => {
   console.log('fetching data')
   const res = await fetch('http://localhost:3000/blogs')
   const data = await res.json()
   return data
-}
+})
 
 
 
@@ -22,8 +23,7 @@ export default component$(() => {
 
   // hook for data
   // can be used on server or client on browser
-  const blogsData = useEndpoint<BlogData[]>()
-
+  const blogsData = useBlogs()
   // use signal is fine for 1 value 
   const name = useSignal('martin')
 
@@ -59,12 +59,14 @@ export default component$(() => {
         onPending={() => <div>Loading</div>}
         onResolved={(blogs) => (
           <div class="blogs">
-            {blogs && blogs.map(blog => (
+            <>
+            {blogs && blogs.map((blog) => (
               <div key={blog.id}>
                 <h3>{blog.title}</h3>
                 <p>{blog.content.slice(0,50)}...</p>
               </div>
             ))}
+            </>
           </div>
         )}
       />
