@@ -1,6 +1,8 @@
 // every route needs its own folder and file called index.tsx
 
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$, useSignal, useStyles$ } from "@builder.io/qwik";
+import Modal from "~/components/modal/modal";
+
 
 // the dollar sign spilts it on chunks its code spiltting on steroids
 
@@ -11,12 +13,19 @@ export default component$(() => {
     // need to useStyles hook 
     useStyles$(AboutStyles)
     // not scoped to any page
+
+    const modalVisible = useSignal(false)
     return(
         <article>
             <h2>About</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, ducimus!</p>
             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque dignissimos doloribus dolorem autem praesentium iste explicabo expedita sequi impedit laudantium!</p>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, deleniti optio enim, minima ipsum aut natus ut magni fugit similique labore doloribus quas quod voluptatibus obcaecati nihil nostrum vitae quaerat!</p>
+            <button onClick$={() =>modalVisible.value= true}>Open Modal</button>
+
+            {modalVisible.value &&(
+                <Modal  />
+            )}
         </article>
     )
 })
