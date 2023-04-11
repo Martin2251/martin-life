@@ -1,6 +1,6 @@
 // every route needs its own folder and file called index.tsx
 
-import { component$, useSignal, useStyles$ } from "@builder.io/qwik";
+import { component$, useSignal, useStyles$, $} from "@builder.io/qwik";
 import Modal from "~/components/modal/modal";
 
 
@@ -15,6 +15,13 @@ export default component$(() => {
     // not scoped to any page
 
     const modalVisible = useSignal(false)
+
+    // turns this into a qrl because we are passing it as a prop into anorther component
+    const closeModal = $(() => {
+        modalVisible.value=false
+    })
+
+    $
     return(
         <article>
             <h2>About</h2>
@@ -24,7 +31,7 @@ export default component$(() => {
             <button onClick$={() =>modalVisible.value= true}>Open Modal</button>
 
             {modalVisible.value &&(
-                <Modal size="sm" frosted={true}>
+                <Modal size="sm" frosted={true} close={closeModal}>
                     <div q:slot="content">
                     <h2>hello world</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Temporibus, dolorem.</p>
