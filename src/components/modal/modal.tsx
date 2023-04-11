@@ -1,4 +1,4 @@
-import {  component$, useStylesScoped$ } from "@builder.io/qwik";
+import {  component$, Slot, useStylesScoped$ } from "@builder.io/qwik";
 import ModalStyles from "./modal.css?inline"
 
 export default component$(() => {
@@ -8,10 +8,10 @@ export default component$(() => {
             <div class="modal-content">
                 <div class="close"></div>
                 <main class="main-content">
-                main modal content
+               <Slot name="content"/>
                 </main>
                 <footer>
-                    modal footer content
+                   <Slot name="footer"  />
                 </footer>
             </div>
 
